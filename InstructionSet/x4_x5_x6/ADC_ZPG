@@ -1,0 +1,7 @@
+ADC_ZPG 65 5
+mic_count bypass pc_count isr_block
+mic_count bypass pc_oe read_mode_and_dlatch_active
+mic_count_and_oe_a load_a bypass dlatch_out_abl
+mic_count alu_sum_actived alu_in read_mode
+mic_reset_and_we_a alu_out pc_count terminate_process
+

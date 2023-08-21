@@ -1,0 +1,7 @@
+LDA_ZPG_X B5 5
+mic_count bypass pc_count isr_block
+mic_count bypass pc_oe_alu_in read_mode
+mic_count_and_oe_x load_a_alu_sum_actived pc_oe isr_block
+mic_count bypass alu_out_abl isr_bock
+mic_reset_and_we_a bypass pc_count read_mode
+

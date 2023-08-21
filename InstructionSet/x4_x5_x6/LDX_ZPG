@@ -1,0 +1,6 @@
+LDX_ZPG A6 4
+mic_count bypass pc_count isr_block
+mic_count bypass pc_oe read_mode_and_dlatch_active
+mic_count bypass bypass latch_out_abl
+mic_reset_and_we_x bypass pc_count read_mode
+

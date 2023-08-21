@@ -1,0 +1,7 @@
+ORA_ZPG 05 5
+mis_count bypass pc_count isr_block
+mic_count bypass pc_oe read_mode_and_dlatch_active
+mic_count_and_oe_a load_a bypass latch_out_abl
+mic_count alu_or_actived pc_oe_alu_load read_mode
+mic_reset_and_we_a alu_out pc_count terminate_process
+
