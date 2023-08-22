@@ -1,0 +1,7 @@
+RTS 60 5
+mic_count bypass sp_oe isr_block
+mic_count bypass sp_inc_pcl_load write_mode
+mic_count bypass sp_inc_pch_load write_mode
+mic_count bypass pc_load_reg isr_block
+mic_reset bypass pc_oe terminate_process
+

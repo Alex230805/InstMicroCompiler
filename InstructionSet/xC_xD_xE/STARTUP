@@ -1,0 +1,11 @@
+STARTUP CF 9
+mic_count bypass pc_oe status_reset
+mic_count bypass pcl_load isr_block
+mic_count bypass pch_load isr_block
+mic_count bypass pc_load_reg isr_block
+mic_count bypass pc_oe isr_block
+mic_count bypass pc_count read_mode_and_pcl_load
+mic_count bypass pc_oe read_mode_and_pch_load
+mic_count bypass pc_load_reg isr_block
+mic_reset bypass pc_oe terminate_process
+

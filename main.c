@@ -49,6 +49,9 @@ char path_instruction_set[][64] = {
     {"./InstructionSet/x0_x1_x2/LDY_IMP"},
     {"./InstructionSet/x0_x1_x2/CPX_IMP"},
     {"./InstructionSet/x0_x1_x2/CPY_IMP"},
+    {"./InstructionSet/x0_x1_x2/JSR"},
+    {"./InstructionSet/x0_x1_x2/RTS"},
+    {"./InstructionSet/x0_x1_x2/RTI"},
 
     {"./InstructionSet/x4_x5_x6/ADC_ZPG"},
     {"./InstructionSet/x4_x5_x6/ADC_ZPG_X"},
@@ -131,9 +134,55 @@ char path_instruction_set[][64] = {
     {"./InstructionSet/x8_x9_xA/TXA"},
     {"./InstructionSet/x8_x9_xA/TXS"},
     {"./InstructionSet/x8_x9_xA/TYA"},
+
+    {"./InstructionSet/xC_xD_xE/ADC_ABS"},
+    {"./InstructionSet/xC_xD_xE/ADC_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/AND_ABS"},
+    {"./InstructionSet/xC_xD_xE/AND_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/ASL_ABS"},
+    {"./InstructionSet/xC_xD_xE/ASL_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/BIT_ABS"},
+    {"./InstructionSet/xC_xD_xE/CMP_ABS"},
+    {"./InstructionSet/xC_xD_xE/CMP_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/CPX_ABS"},
+    {"./InstructionSet/xC_xD_xE/CPY_ABS"},
+    {"./InstructionSet/xC_xD_xE/DEC_ABS"},
+    {"./InstructionSet/xC_xD_xE/DEC_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/EOR_ABS"},
+    {"./InstructionSet/xC_xD_xE/EOR_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/INC_ABS"},
+    {"./InstructionSet/xC_xD_xE/INC_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/INTERRUPT"},
+    {"./InstructionSet/xC_xD_xE/JMP_ABS"},
+    {"./InstructionSet/xC_xD_xE/JMP_IND"},
+    {"./InstructionSet/xC_xD_xE/LDA_ABS"},
+    {"./InstructionSet/xC_xD_xE/LDA_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/LDX_ABS"},
+    {"./InstructionSet/xC_xD_xE/LDX_ABS_Y"},
+    {"./InstructionSet/xC_xD_xE/LDY_ABS"},
+    {"./InstructionSet/xC_xD_xE/LDY_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/LSR_ABS"},
+    {"./InstructionSet/xC_xD_xE/LSR_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/NMI"},
+    {"./InstructionSet/xC_xD_xE/ORA_ABS"},
+    {"./InstructionSet/xC_xD_xE/ORA_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/RESET"},
+    {"./InstructionSet/xC_xD_xE/ROL_ABS"},
+    {"./InstructionSet/xC_xD_xE/ROL_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/ROR_ABS"},
+    {"./InstructionSet/xC_xD_xE/ROR_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/SBC_ABS"},
+    {"./InstructionSet/xC_xD_xE/SBC_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/STA_ABS"},
+    {"./InstructionSet/xC_xD_xE/STA_ABS_X"},
+    {"./InstructionSet/xC_xD_xE/STARTUP"},
+    {"./InstructionSet/xC_xD_xE/STX_ABS"},
+    {"./InstructionSet/xC_xD_xE/STY_ABS"}
+
+
 };
 
-const int INST_LIMIT = 101;
+const int INST_LIMIT = 147;
 
 int main(){
     FILE * bin1;
