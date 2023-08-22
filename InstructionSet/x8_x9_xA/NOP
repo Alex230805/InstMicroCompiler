@@ -1,0 +1,4 @@
+NOP EA 2
+mic_count bypass pc_oe isr_block
+mic_reset bypass pc_count terminate_process
+

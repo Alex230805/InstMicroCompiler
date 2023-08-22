@@ -1,0 +1,6 @@
+PLA 68 4
+mic_count bypass pc_oe isr_block
+mic_count bypass sp_oe isr_block
+mic_count_and_we_a bypass sp_count read_mode
+mic_reset bypass pc_count terminate_process
+

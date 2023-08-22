@@ -1,0 +1,4 @@
+TAX AA 2
+mic_count bypass pc_oe isr_block
+mic_count_oe_a_we_x bypass pc_count terminate_process
+

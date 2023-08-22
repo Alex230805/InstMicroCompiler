@@ -1,0 +1,4 @@
+SEC 38 2
+mic_count bypass pc_oe isr_block
+mic_reset bypass pc_count set_carry
+
