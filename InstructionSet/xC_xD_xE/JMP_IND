@@ -1,5 +1,5 @@
 JMP_IND 6C 9
-mic_count bypass pc_count isr_block
+mic_count bypass pc_oe isr_block
 mic_count bypass pc_count read_mode_and_dlatch_active
 mic_count bypass pc_oe read_mode_and_dlatch_h_active
 mic_count bypass pc_load_reg isr_block
