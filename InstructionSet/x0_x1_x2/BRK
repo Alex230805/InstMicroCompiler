@@ -1,5 +1,6 @@
-BRK 00 11
-mic_count bypass sp_oe isr_block
+BRK 00 12
+mic_count bypass bypass isr_block
+mic_count bypass sp_oe isr_block_brk_mode
 mic_count bypass sp_dec_pcl_bus write_mode
 mic_count bypass sp_dec_pch_bus write_mode
 mic_count bypass pcl_load isr_block

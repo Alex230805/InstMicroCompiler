@@ -25,4 +25,5 @@ set_interrupt_disable
 clear_decimal_mode
 set_decimal_mode
 clear_overflow
+isr_block_brk_mode
 END
