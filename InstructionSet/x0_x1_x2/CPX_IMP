@@ -1,6 +1,6 @@
 CPX_IMP E0 4
-mic_count bypass pc_count isr_block
+mic_count bypass pc_count bypass
 mic_count bypass pc_oe_alu_load read_mode
 mic_count_and_oe_y load_a_alu_sub_actived bypass isr_block
-mic_count bypass pc_count terminate_process
+mic_count bypass pc_count isr_block
 

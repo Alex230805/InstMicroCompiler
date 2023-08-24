@@ -1,8 +1,9 @@
-LDX_ABS_Y BE 6
-mic_count bypass pc_count isr_block
+LDX_ABS_Y BE 7
+mic_count bypass pc_count bypass
 mic_count load_a pc_count read_mode
 mic_count bypass pc_oe_alu_load read_mode
 mic_count_and_oe_y load_c_alu_16b_adr bypass isr_block
 mic_count bypass alu_all_adr_out isr_block
-mic_reset_and_we_x bypass pc_count read_mode
+mic_count_and_we_x bypass bypass read_mode
+mic_reset bypass pc_count isr_block
 

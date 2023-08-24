@@ -1,7 +1,7 @@
 STA_ZPG_X 95 5
-mic_count bypass pc_count isr_block
+mic_count bypass pc_count bypass
 mic_count bypass pc_oe_alu_in read_mode
 mic_count_oe_and_x load_a_alu_sum_actived pc_oe isr_block
 mic_count bypass alu_out_abl isr_block
-mic_reset_and_oe_a bypass pc_count write_mode
+mic_reset_and_oe_a bypass pc_count isr_block
 

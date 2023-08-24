@@ -1,5 +1,5 @@
 ORA_Y_IND 11 17
-mic_count bypass pc_count isr_block
+mic_count bypass pc_count bypass
 mic_count bypass pcl_bus dlatch_in
 mic_count bypass pch_bus dlatch_h_in
 mic_count bypass pc_count read_mode_and_pcl_load
@@ -15,5 +15,5 @@ mic_count_and_we_a alu_out bypass isr_block
 mic_count bypass pcl_load dlatch_out
 mic_count bypass pch_load dlatch_h_out
 mic_count bypass pc_load_reg isr_block
-mic_reset bypass pc_count terminate_process
+mic_reset bypass pc_count isr_block
 

@@ -1,4 +1,4 @@
 CLI 58 2
-mic_count bypass pc_oe isr_block
-mic_reset bypass pc_count clear_interrupt_disable
+mic_count bypass pc_count bypass
+mic_reset bypass pc_oe clear_interrupt_disable
 

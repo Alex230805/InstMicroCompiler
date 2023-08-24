@@ -1,4 +1,4 @@
 TYA 98 2
-mic_count bypass pc_oe isr_block
-mic_reset_oe_y_we_a bypass pc_count terminate_process
+mic_count bypass pc_count bypass
+mic_reset_oe_y_we_a bypass pc_oe isr_block
 

@@ -1,7 +1,7 @@
 AND_ZPG 25 5
-mic_count bypass pc_count isr_block
+mic_count bypass pc_count bypass
 mic_count bypass pc_oe read_mode_and_dlatch_active
 mic_count_and_oe_a load_a bypass latch_out_abl
 mic_count alu_and_actived pc_oe_alu_load read_mode
-mic_reset_and_we_a alu_out pc_count terminate_process
+mic_reset_and_we_a alu_out pc_count isr_block
 
