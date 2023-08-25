@@ -1,6 +1,5 @@
 PLP 28 4
 mic_count bypass pc_oe bypass
-mic_count bypass sp_oe isr_block
 mic_count bypass sp_count read_mode_and_status_update
 mic_reset bypass pc_count isr_block
 

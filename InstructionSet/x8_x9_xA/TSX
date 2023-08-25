@@ -1,5 +1,5 @@
 TSX BA 3
-mic_count bypass sp_inc bypass
-mic_count_and_we_x bypass bypass write_mode
+mic_count bypass pc_oe bypass
+mic_count_and_we_x bypass pc_count read_mode
 mic_reset bypass pc_count isr_block
 

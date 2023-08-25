@@ -1,6 +1,5 @@
 PHA 48 4
 mic_count bypass pc_oe bypass
-mic_count bypass sp_oe isr_block
 mic_count_and_oe_a bypass sp_dec write_mode
 mic_reset bypass pc_count isr_block
 
