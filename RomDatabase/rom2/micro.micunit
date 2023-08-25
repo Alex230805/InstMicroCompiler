@@ -26,4 +26,9 @@ alu_all_adr_out
 alu_all_adr_out_pc_load
 alu_in_pcl_bus
 alu_in_pch_bus
+sp_oe_pcl_bus
+sp_oe_pch_bus
+inc_reg
+sp_oe_pcl_load
+sp_oe_pch_load
 END
