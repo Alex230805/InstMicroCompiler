@@ -1,4 +1,4 @@
-PLA 68 4
+PLA 68 3
 mic_count bypass pc_oe bypass
 mic_count_and_we_a bypass sp_count read_mode
 mic_reset bypass pc_count isr_block

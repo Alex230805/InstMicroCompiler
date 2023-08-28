@@ -2,4 +2,3 @@ LDX_IMP A2 3
 mic_count bypass pc_count bypass
 mic_count_and_we_x bypass pc_oe read_mode
 mic_reset bypass pc_count isr_block
-

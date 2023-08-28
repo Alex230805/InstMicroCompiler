@@ -1,4 +1,4 @@
-LSR_ZPG 46 5
+LSR_ZPG 46 4
 mic_count bypass pc_count bypass
 mic_count bypass pc_oe read_mode_and_dlatch_active
 mic_count bypass bypass latch_out_abl

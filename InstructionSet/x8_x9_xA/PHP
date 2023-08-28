@@ -1,4 +1,4 @@
-PHP 08 4
+PHP 08 3
 mic_count bypass pc_oe bypass
 mic_count bypass sp_dec write_mode_and_status_out
 mic_reset bypass pc_count isr_block
