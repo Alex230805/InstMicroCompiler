@@ -1,4 +1,4 @@
 SEI 78 2
 mic_count bypass pc_count bypass
-mic_reset bypass pc_oe set_interrupt
+mic_reset bypass pc_oe set_interrupt_disable
 
