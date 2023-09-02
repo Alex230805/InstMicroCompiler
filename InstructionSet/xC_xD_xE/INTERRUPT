@@ -1,14 +1,14 @@
 INTERRUPT FF 12
-mic_count bypass pc_oe isr_block
+mic_count bypass pc_oe bypass
 mic_count bypass sp_dec_pcl_bus write_mode
 mic_count bypass sp_dec_pch_bus write_mode
-mic_count bypass sp_oe write_mode_and_status_out
+mic_count bypass sp_dec write_mode_and_status_out
+mic_count_and_oe_a bypass sp_dec write_mode
 mic_count bypass pcl_load isr_block
 mic_count bypass pch_load isr_block
 mic_count bypass pc_load_reg isr_block
-mic_count bypass pc_oe isr_block
 mic_count bypass pc_count read_mode_and_pcl_load
 mic_count bypass pc_oe read_mode_and_pch_load
 mic_count bypass pc_load_reg isr_block
-mic_reset bypass pc_oe terminate_process
+mic_reset bypass pc_oe bypass
 
