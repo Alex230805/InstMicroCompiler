@@ -8,7 +8,7 @@ pc_count
 pcl_bus
 pch_bus
 sp_oe
-sp_reset
+sp_load
 sp_dec_pcl_bus
 sp_dec_pch_bus
 sp_dec
@@ -31,4 +31,6 @@ sp_oe_pch_bus
 inc_reg
 sp_oe_pcl_load
 sp_oe_pch_load
+pc_oe_alu_in
+sp_to_bus
 END

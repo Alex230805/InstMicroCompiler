@@ -1,7 +1,7 @@
 SBC_ZPG E5 5
 mic_count bypass pc_count bypass
 mic_count bypass pc_oe read_mode_and_dlatch_active
-mic_count_and_oe_a load_a bypass dlatch_out_abl
+mic_count_and_oe_a load_a pc_oe dlatch_out_abl
 mic_count alu_sub_actived alu_in read_mode
 mic_reset_and_we_a alu_out pc_count isr_block
 

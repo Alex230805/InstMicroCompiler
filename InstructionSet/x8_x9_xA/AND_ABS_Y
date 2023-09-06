@@ -2,7 +2,7 @@ AND_ABS_Y 39 7
 mic_count bypass pc_count bypass
 mic_count load_a pc_count read_mode
 mic_count bypass pc_oe_alu_load read_mode
-mic_count_and_oe_y load_c_alu_16b_adr bypass isr_block
+mic_count_and_oe_y load_c_alu_16b_adr pc_oe isr_block
 mic_count_and_oe_a load_a alu_all_adr_out isr_block
 mic_count alu_and_actived alu_in read_mode
 mic_reset_and_we_a alu_out pc_count isr_block

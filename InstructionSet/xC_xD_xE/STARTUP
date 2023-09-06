@@ -1,5 +1,5 @@
 STARTUP CF 8
-mic_count bypass sp_reset isr_block
+mic_count bypass pc_oe isr_block
 mic_count bypass pcl_load isr_block
 mic_count bypass pch_load isr_block
 mic_count bypass pc_load_reg isr_block

@@ -1,5 +1,5 @@
 TXS 9A 3
 mic_count bypass pc_count bypass
-mic_count_and_oe_x bypass sp_dec write_mode
+mic_count_and_oe_x bypass sp_reset write_mode
 mic_reset bypass pc_oe isr_block
 

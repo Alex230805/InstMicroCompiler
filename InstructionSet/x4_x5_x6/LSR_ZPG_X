@@ -1,4 +1,4 @@
-LSR_ZPG_X 56 5
+LSR_ZPG_X 56 6
 mic_count bypass pc_count bypass
 mic_count bypass pc_oe_alu_in read_mode
 mic_count_and_oe_x load_a_alu_sum_actived pc_oe isr_block
