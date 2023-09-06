@@ -27,7 +27,7 @@ char path_bin_3[] = "./out/rom3.bin";
 char path_bin_4[] = "./out/rom4.bin";
 
 
-char path_instruction_set[][64] = {
+char path_instruction_set[][128] = {
     {"./InstructionSet/x0_x1_x2/BRK"},
     {"./InstructionSet/x0_x1_x2/ORA_IND_X"},
     {"./InstructionSet/x0_x1_x2/ORA_Y_IND"},
@@ -177,12 +177,28 @@ char path_instruction_set[][64] = {
     {"./InstructionSet/xC_xD_xE/STA_ABS_X"},
     {"./InstructionSet/xC_xD_xE/STARTUP"},
     {"./InstructionSet/xC_xD_xE/STX_ABS"},
-    {"./InstructionSet/xC_xD_xE/STY_ABS"}
+    {"./InstructionSet/xC_xD_xE/STY_ABS"},
 
+    {"./InstructionSet/conditional_branching/not_taken/BCC"},
+    {"./InstructionSet/conditional_branching/not_taken/BCS"},
+    {"./InstructionSet/conditional_branching/not_taken/BEQ"},
+    {"./InstructionSet/conditional_branching/not_taken/BMI"},
+    {"./InstructionSet/conditional_branching/not_taken/BNE"},
+    {"./InstructionSet/conditional_branching/not_taken/BPL"},
+    {"./InstructionSet/conditional_branching/not_taken/BVC"},
+    {"./InstructionSet/conditional_branching/not_taken/BVS"},
 
+    {"./InstructionSet/conditional_branching/taken/BCC"},
+    {"./InstructionSet/conditional_branching/taken/BCS"},
+    {"./InstructionSet/conditional_branching/taken/BEQ"},
+    {"./InstructionSet/conditional_branching/taken/BMI"},
+    {"./InstructionSet/conditional_branching/taken/BNE"},
+    {"./InstructionSet/conditional_branching/taken/BPL"},
+    {"./InstructionSet/conditional_branching/taken/BVC"},
+    {"./InstructionSet/conditional_branching/taken/BVS"}
 };
 
-const int INST_LIMIT = 147;
+const int INST_LIMIT = 163;
 
 int main(){
     FILE * bin1;
@@ -216,18 +232,19 @@ int main(){
             n = (node*)malloc(sizeof(node));
             n->next = NULL;
             fscanf(inst, "%s %s %d\n", &n->name, &n->ADDRESS, &n->step);
-            for(int i=0;i<n->step;i++){
-                fscanf(inst, "%s %s %s %s", &buffer_in_4[i], &buffer_in_3[i], &buffer_in_2[i],&buffer_in_1[i]);
+            for(int z=0;z<n->step;z++){
+                fscanf(inst, "%s %s %s %s", &buffer_in_4[z], &buffer_in_3[z], &buffer_in_2[z],&buffer_in_1[z]);
             }
-            for(int i=0;i<n->step;i++){
-                strcpy(n->microcode_rom1[i], buffer_in_1[i]);
-                strcpy(n->microcode_rom2[i], buffer_in_2[i]);
-                strcpy(n->microcode_rom3[i], buffer_in_3[i]);
-                strcpy(n->microcode_rom4[i], buffer_in_4[i]);
+            for(int z=0;z<n->step;z++){
+                strcpy(n->microcode_rom1[z], buffer_in_1[z]);
+                strcpy(n->microcode_rom2[z], buffer_in_2[z]);
+                strcpy(n->microcode_rom3[z], buffer_in_3[z]);
+                strcpy(n->microcode_rom4[z], buffer_in_4[z]);
             }
             listAddInstNode(&InstructionList,n);
         }
         fclose(inst);
+        printf("Instructions parsed: %d\n", i+1);
     }
     printf("Done!\n");
     printf("Start traslating .. ");

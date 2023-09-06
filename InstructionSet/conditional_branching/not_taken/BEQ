@@ -1,0 +1,3 @@
+BEQ F0 2
+mic_count bypass pc_count bypass
+mic_reset bypass pc_oe isr_block

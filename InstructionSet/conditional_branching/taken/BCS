@@ -1,0 +1,8 @@
+BCS 10B0 7
+mic_count bypass pc_count bypass
+mic_count bypass alu_in_pch_bus isr_block
+mic_count load_a pcl_bus isr_block
+mic_count load_c_alu_16b_adr bypass read_mode
+mic_count bypass alu_all_adr_out_pc_load isr_block
+mic_count bypass pc_load_reg isr_block
+mic_reset bypass pc_oe bypass
