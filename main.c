@@ -14,17 +14,20 @@ char path_microcode_1[] = "./RomDatabase/rom1/micro.micunit";
 char path_microcode_2[] = "./RomDatabase/rom2/micro.micunit";
 char path_microcode_3[] = "./RomDatabase/rom3/micro.micunit";
 char path_microcode_4[] = "./RomDatabase/rom4/micro.micunit";
+char path_microcode_5[] = "./RomDatabase/flag_rom/micro.f";
 
 //path to hexadecimal microcode reference
 char path_hex_1[] = "./RomDatabase/rom1/rom_hex.micunit";
 char path_hex_2[] = "./RomDatabase/rom2/rom_hex.micunit";
 char path_hex_3[] = "./RomDatabase/rom3/rom_hex.micunit";
 char path_hex_4[] = "./RomDatabase/rom4/rom_hex.micunit";
+char path_hex_5[] = "./RomDatabase/flag_rom/rom_hex.f";
 //path to binary file
 char path_bin_1[] = "./out/rom1.bin";
 char path_bin_2[] = "./out/rom2.bin";
 char path_bin_3[] = "./out/rom3.bin";
 char path_bin_4[] = "./out/rom4.bin";
+char path_bin_5[] = "./out/flag_rom.bin";
 
 
 char path_instruction_set[][128] = {
@@ -195,7 +198,17 @@ char path_instruction_set[][128] = {
     {"./InstructionSet/conditional_branching/taken/BNE"},
     {"./InstructionSet/conditional_branching/taken/BPL"},
     {"./InstructionSet/conditional_branching/taken/BVC"},
-    {"./InstructionSet/conditional_branching/taken/BVS"}
+    {"./InstructionSet/conditional_branching/taken/BVS"},
+
+
+    {"./InstructionSet/flag_rom/BCC"},
+    {"./InstructionSet/flag_rom/BCS"},
+    {"./InstructionSet/flag_rom/BEQ"},
+    {"./InstructionSet/flag_rom/BMI"},
+    {"./InstructionSet/flag_rom/BNE"},
+    {"./InstructionSet/flag_rom/BPL"},
+    {"./InstructionSet/flag_rom/BVC"},
+    {"./InstructionSet/flag_rom/BVS"}
 };
 
 const int INST_LIMIT = 163;
@@ -205,6 +218,7 @@ int main(){
     FILE * bin2;
     FILE * bin3;
     FILE * bin4;
+    FILE * bin5;
     char sel;
     //define main struct 
     listHeader InstructionList = initializeHeader();
@@ -218,12 +232,15 @@ int main(){
     printf("3rd rom -> database loaded\n");
     loadDatabase(path_hex_4, path_microcode_4,&RomData, rom4);
     printf("4th rom -> database loaded\n");
+    loadDatabase(path_hex_5, path_microcode_5, &RomData, rom5);
+    printf("5ft rom -> database loaded\n");
     printf("Start loading instruction set .. ");
-    for(int i=0;i<INST_LIMIT;i++){
+    for(int i=0;i<INST_LIMIT+8;i++){
         char buffer_in_1[64][64];
         char buffer_in_2[64][64];
         char buffer_in_3[64][64];
         char buffer_in_4[64][64];
+        char buffer_in_5[64][64];
         node * n;
         FILE * inst; 
         if((inst = fopen(path_instruction_set[i], "r")) == NULL){
@@ -232,37 +249,59 @@ int main(){
             n = (node*)malloc(sizeof(node));
             n->next = NULL;
             fscanf(inst, "%s %s %d\n", &n->name, &n->ADDRESS, &n->step);
-            for(int z=0;z<n->step;z++){
-                fscanf(inst, "%s %s %s %s", &buffer_in_4[z], &buffer_in_3[z], &buffer_in_2[z],&buffer_in_1[z]);
+            if(i >= INST_LIMIT){
+                for(int z=0;z<n->step;z++){
+                    fscanf(inst, "%s", &buffer_in_5[z]);
+                }
+            }else{
+                for(int z=0;z<n->step;z++){
+                    fscanf(inst, "%s %s %s %s", &buffer_in_4[z], &buffer_in_3[z],&buffer_in_2[z],&buffer_in_1[z]);
+                }
             }
-            for(int z=0;z<n->step;z++){
-                strcpy(n->microcode_rom1[z], buffer_in_1[z]);
-                strcpy(n->microcode_rom2[z], buffer_in_2[z]);
-                strcpy(n->microcode_rom3[z], buffer_in_3[z]);
-                strcpy(n->microcode_rom4[z], buffer_in_4[z]);
+            if(i >= INST_LIMIT){
+                for(int z=0;z<n->step;z++){
+                    strcpy(n->microcode_rom5[z], buffer_in_5[z]);
+                }
+                printf("Flag/status requeset Instructions parsed: %d\n", i+1);
+            }else{
+                for(int z=0;z<n->step;z++){
+                    strcpy(n->microcode_rom1[z], buffer_in_1[z]);
+                    strcpy(n->microcode_rom2[z], buffer_in_2[z]);
+                    strcpy(n->microcode_rom3[z], buffer_in_3[z]);
+                    strcpy(n->microcode_rom4[z], buffer_in_4[z]);
+                }
+                printf("Instructions parsed: %d\n", i+1);
             }
             listAddInstNode(&InstructionList,n);
         }
         fclose(inst);
-        printf("Instructions parsed: %d\n", i+1);
     }
     printf("Done!\n");
+
+
     printf("Start traslating .. ");
-    for(int i=0;i<INST_LIMIT;i++){
+    for(int i=0;i<INST_LIMIT+8;i++){
         char buffer_out_1[64][64];
         char buffer_out_2[64][64];
         char buffer_out_3[64][64];
         char buffer_out_4[64][64];
-        for(int i=0;i<InstructionList.pointer->step;i++){
-            extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom1[i],buffer_out_1[i], rom1);
-            extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom2[i],buffer_out_2[i], rom2);
-            extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom3[i],buffer_out_3[i], rom3);
-            extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom4[i],buffer_out_4[i], rom4);
-
-            strcpy(InstructionList.pointer->microcode_rom1[i],buffer_out_1[i]);
-            strcpy(InstructionList.pointer->microcode_rom2[i],buffer_out_2[i]);
-            strcpy(InstructionList.pointer->microcode_rom3[i],buffer_out_3[i]);
-            strcpy(InstructionList.pointer->microcode_rom4[i],buffer_out_4[i]);
+        char buffer_out_5[64][64];
+        for(int z=0;z<InstructionList.pointer->step;z++){
+            if(i >= INST_LIMIT){
+                extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom5[z], buffer_out_5[z], rom5);
+                printf("Info extracted in micro-step %d for flag return control signal %s: %s\n",i+1,InstructionList.pointer->name,buffer_out_5[z]);
+                strcpy(InstructionList.pointer->microcode_rom5[z], buffer_out_5[z]);
+            }else{
+                extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom1[z],buffer_out_1[z], rom1);
+                extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom2[z],buffer_out_2[z], rom2);
+                extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom3[z],buffer_out_3[z], rom3);
+                extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom4[z],buffer_out_4[z], rom4);
+                printf("Info extracted in micro-step %d for instruction %s : %s %s %s %s\n",i+1,InstructionList.pointer->name,buffer_out_4[z],buffer_out_3[z],buffer_out_2[z],buffer_out_1[z]);
+                strcpy(InstructionList.pointer->microcode_rom1[z],buffer_out_1[z]);
+                strcpy(InstructionList.pointer->microcode_rom2[z],buffer_out_2[z]);
+                strcpy(InstructionList.pointer->microcode_rom3[z],buffer_out_3[z]);
+                strcpy(InstructionList.pointer->microcode_rom4[z],buffer_out_4[z]);
+            }
         }
         if(InstructionList.pointer->next != NULL){
             InstructionList.pointer = InstructionList.pointer->next;
@@ -271,12 +310,15 @@ int main(){
     }
     printf("Done!\n");
     InstructionList.pointer = InstructionList.first;
+    
+    
     printf("Start dumping .. ");
     bin1 = fopen(path_bin_1, "w+b");
     bin2 = fopen(path_bin_2, "w+b");
     bin3 = fopen(path_bin_3, "w+b");
     bin4 = fopen(path_bin_4, "w+b");
-    if(bin1 == NULL || bin2 == NULL || bin3 == NULL || bin4 == NULL){
+    bin5 = fopen(path_bin_5, "w+b");
+    if(bin1 == NULL || bin2 == NULL || bin3 == NULL || bin4 == NULL || bin5 == NULL){
         printf("\nFailed while opening output binary file, aborting ..\n");
         exit(0);
     }else{
@@ -284,18 +326,30 @@ int main(){
         uint8_t buffer_out_2[64];
         uint8_t buffer_out_3[64];
         uint8_t buffer_out_4[64];
-        for(int i=0;i<INST_LIMIT;i++){
-            for(int i=0;i<InstructionList.pointer->step;i++){
-                buffer_out_1[i] = hexStringConverter(InstructionList.pointer->microcode_rom1[i]);
-                buffer_out_2[i] = hexStringConverter(InstructionList.pointer->microcode_rom2[i]);
-                buffer_out_3[i] = hexStringConverter(InstructionList.pointer->microcode_rom3[i]);
-                buffer_out_4[i] = hexStringConverter(InstructionList.pointer->microcode_rom4[i]);
+        uint8_t buffer_out_5[64];
+        for(int i=0;i<INST_LIMIT+8;i++){
+            if(i >= INST_LIMIT){
+                for(int z=0;z<InstructionList.pointer->step;z++){
+                    buffer_out_5[z] = hexStringConverter(InstructionList.pointer->microcode_rom5[z]);
+                }
+            }else{
+                for(int z=0;z<InstructionList.pointer->step;z++){
+                    buffer_out_1[z] = hexStringConverter(InstructionList.pointer->microcode_rom1[z]);
+                    buffer_out_2[z] = hexStringConverter(InstructionList.pointer->microcode_rom2[z]);
+                    buffer_out_3[z] = hexStringConverter(InstructionList.pointer->microcode_rom3[z]);
+                    buffer_out_4[z] = hexStringConverter(InstructionList.pointer->microcode_rom4[z]);
+                }
             }
-            uint8_t address = hexStringConverter(InstructionList.pointer->ADDRESS);
-            write(buffer_out_1, address ,InstructionList.pointer->step,bin1);
-            write(buffer_out_2, address ,InstructionList.pointer->step,bin2);
-            write(buffer_out_3, address ,InstructionList.pointer->step,bin3);
-            write(buffer_out_4, address ,InstructionList.pointer->step,bin4);
+            if(i >= INST_LIMIT){
+                uint8_t address_f = hexStringConverter(InstructionList.pointer->ADDRESS);
+                write(buffer_out_5, address_f, InstructionList.pointer->step,bin5);
+            }else{
+                uint8_t address = hexStringConverter(InstructionList.pointer->ADDRESS);
+                write(buffer_out_1, address ,InstructionList.pointer->step,bin1);
+                write(buffer_out_2, address ,InstructionList.pointer->step,bin2);
+                write(buffer_out_3, address ,InstructionList.pointer->step,bin3);
+                write(buffer_out_4, address ,InstructionList.pointer->step,bin4);
+            }
             if(InstructionList.pointer->next != NULL){
                 InstructionList.pointer = InstructionList.pointer->next;
             }
@@ -305,6 +359,7 @@ int main(){
     fclose(bin2);
     fclose(bin3);
     fclose(bin4);
+    fclose(bin5);
     printf("Done!\n");
     InstructionList.pointer = InstructionList.first;
     printf("Show written data? (Y/N): ");

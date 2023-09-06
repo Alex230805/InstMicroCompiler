@@ -16,22 +16,26 @@ romContainer initializeRomContainer(){
     romDatabase * r2 = NULL;
     romDatabase * r3 = NULL;
     romDatabase * r4 = NULL;
+    romDatabase * r5 = NULL;
     romDatabase * cp = NULL;
 
     r1 = (romDatabase*)malloc(sizeof(romDatabase));
     r2 = (romDatabase*)malloc(sizeof(romDatabase));
     r3 = (romDatabase*)malloc(sizeof(romDatabase));
     r4 = (romDatabase*)malloc(sizeof(romDatabase));
+    r5 = (romDatabase*)malloc(sizeof(romDatabase));
 
     r1->next = NULL;
     r2->next = NULL;
     r3->next = NULL;
     r4->next = NULL;
+    r5->next = NULL;
 
     romD.rom1 = r1;
     romD.rom2 = r2;
     romD.rom3 = r3;
     romD.rom4 = r4;
+    romD.rom5 = r5;
     romD.customPointer = NULL;
     return romD;
 }
@@ -117,6 +121,24 @@ void loadDatabase(char hex_path[], char path[], romContainer * rom, romSelector 
                     rom->customPointer = rom->customPointer->next;
                 }
                 break;
+
+            case rom5:
+                    rom->customPointer = rom->rom5;
+                    while((fscanf(mnemonic, "%s\n", &buffer)) != EOF){
+                        romDatabase * rp;
+                        rp = (romDatabase*)malloc(sizeof(romDatabase));
+                        rp->next = NULL;
+                        strcpy(rom->customPointer->mnemonic, buffer);
+                        rom->customPointer->next = rp;
+                        rom->customPointer = rom->customPointer->next;
+                    }
+                    rom->customPointer->next = NULL;
+                    rom->customPointer = rom->rom5;
+                    while((fscanf(hex, "%s\n", &buffer)) != EOF){
+                        strcpy(rom->customPointer->hex, buffer);
+                        rom->customPointer = rom->customPointer->next;
+                    }
+                    break;
             default:
                 printf("\nWrong Selection, aborting\n");
                 exit(0);
@@ -214,6 +236,18 @@ void extractFromDatabase(romContainer * rom, char data[], char out[], romSelecto
                 }
                 rom->customPointer = NULL;
                 break;
+        case rom5:
+                rom->customPointer = rom->rom5;
+                while(rom->customPointer->next != NULL && found == 0){
+                    if((strcmp(data, rom->customPointer->mnemonic)) == 0){
+                        strcpy(out, rom->customPointer->hex);
+                        found = 1;
+                    }else{
+                        rom->customPointer = rom->customPointer->next;
+                    }
+                }
+                rom->customPointer = NULL;
+                break;
         default:
                 printf("\nWrong Selection, aborting\n");
                 exit(0);
@@ -252,5 +286,6 @@ void freeRomDatabase(romContainer * rom){
     freeROM(rom->rom2);
     freeROM(rom->rom3);
     freeROM(rom->rom4);
+    freeROM(rom->rom5);
     rom->customPointer = NULL;
 }

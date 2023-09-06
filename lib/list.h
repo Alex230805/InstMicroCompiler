@@ -9,7 +9,7 @@
 
 
 #define MAX_MICRO_END 64
-typedef enum{rom1, rom2, rom3,rom4}romSelector;
+typedef enum{rom1, rom2, rom3,rom4,rom5}romSelector;
 
 
 typedef struct n{
@@ -20,6 +20,7 @@ typedef struct n{
     char microcode_rom2[MAX_MICRO_END][MAX_MICRO_END];
     char microcode_rom3[MAX_MICRO_END][MAX_MICRO_END];
     char microcode_rom4[MAX_MICRO_END][MAX_MICRO_END];
+    char microcode_rom5[MAX_MICRO_END][MAX_MICRO_END];
     struct n* next;
 }node;
 
@@ -40,7 +41,7 @@ typedef struct{
     romDatabase * rom2;
     romDatabase * rom3;
     romDatabase * rom4;
-
+    romDatabase * rom5;
     romDatabase * customPointer;
 }romContainer;
 

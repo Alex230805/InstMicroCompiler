@@ -1,0 +1,9 @@
+bcc
+bcs
+beq
+bmi
+bne
+bpl
+bvc
+bvs
+END
