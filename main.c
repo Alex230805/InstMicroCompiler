@@ -5,9 +5,9 @@
 
 void showData(listHeader * InstructionList);
 
-uint8_t hexStringConverter(char string[]);
-int write(uint8_t buffer[], int opcode, int step, FILE * pointer);
-uint8_t hexDigitConverter(char s);
+uint16_t hexStringConverter(char string[]);
+int write(uint8_t buffer[], uint16_t opcode, int step, FILE * pointer);
+uint16_t hexDigitConverter(char s);
 
 //path to mnemonic microcode reference
 char path_microcode_1[] = "./RomDatabase/rom1/micro.micunit";
@@ -248,7 +248,7 @@ int main(){
         }else{
             n = (node*)malloc(sizeof(node));
             n->next = NULL;
-            fscanf(inst, "%s %s %d\n", &n->name, &n->ADDRESS, &n->step);
+            fscanf(inst, "%s %s %d", &n->name, &n->ADDRESS, &n->step);
             if(i >= INST_LIMIT){
                 for(int z=0;z<n->step;z++){
                     fscanf(inst, "%s", &buffer_in_5[z]);
@@ -292,6 +292,9 @@ int main(){
                 printf("Info extracted in micro-step %d for flag return control signal %s: %s\n",i+1,InstructionList.pointer->name,buffer_out_5[z]);
                 strcpy(InstructionList.pointer->microcode_rom5[z], buffer_out_5[z]);
             }else{
+                if((strcmp(InstructionList.pointer->name, "BEQ")) == 0){
+                    printf("Address BEQ: %s, step: %d\n", InstructionList.pointer->ADDRESS, InstructionList.pointer->step);
+                }
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom1[z],buffer_out_1[z], rom1);
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom2[z],buffer_out_2[z], rom2);
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom3[z],buffer_out_3[z], rom3);
@@ -341,10 +344,10 @@ int main(){
                 }
             }
             if(i >= INST_LIMIT){
-                uint8_t address_f = hexStringConverter(InstructionList.pointer->ADDRESS);
+                uint16_t address_f = hexStringConverter(InstructionList.pointer->ADDRESS);
                 write(buffer_out_5, address_f, InstructionList.pointer->step,bin5);
             }else{
-                uint8_t address = hexStringConverter(InstructionList.pointer->ADDRESS);
+                uint16_t address = hexStringConverter(InstructionList.pointer->ADDRESS);
                 write(buffer_out_1, address ,InstructionList.pointer->step,bin1);
                 write(buffer_out_2, address ,InstructionList.pointer->step,bin2);
                 write(buffer_out_3, address ,InstructionList.pointer->step,bin3);
@@ -395,7 +398,7 @@ void showData(listHeader * InstructionList){
 
 
 
-uint8_t hexDigitConverter(char s){
+uint16_t hexDigitConverter(char s){
     if(isdigit(s)){
         return s - '0';
     }else{
@@ -403,8 +406,8 @@ uint8_t hexDigitConverter(char s){
     }
 }
 
-uint8_t hexStringConverter(char string[]){
-    uint8_t HexString = 0;
+uint16_t hexStringConverter(char string[]){
+    uint16_t HexString = 0;
     int len = strlen(string);
     for(int i=0;i<len;i++){
         if(!isxdigit(string[i]))
@@ -415,19 +418,20 @@ uint8_t hexStringConverter(char string[]){
     return HexString;
 }
 
-int write(uint8_t buffer[], int opcode, int step, FILE *pointer){
+int write(uint8_t buffer[], uint16_t opcode, int step, FILE *pointer){
     int statusOp = 0;
     uint16_t address = 0x0000;
     for(int i=0;i<step;i++){
         uint16_t wAdr = address | opcode;
         fseek(pointer ,wAdr, SEEK_SET);
         fwrite(&buffer[i],sizeof(char), 1, pointer);
-        address= (address >> 8) & 0xFF;
-        address ++;
+        address = (address >> 8) & 0xFF;
+        address++;
         if(address > 0xFF){
             address &= 0xFF;
         }
-        address = (address << 8) | (opcode & 0xFF);
+        address = (address << 8) & 0xFF00;
+        address = (opcode & 0xFFFF) | address;
     }
     statusOp = 1;
     return statusOp;

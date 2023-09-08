@@ -1,7 +1,7 @@
-LDX_ZPG_Y B6 5
+LDX_ZPG_Y B6 6
 mic_count bypass pc_count bypass
 mic_count bypass pc_oe_alu_in read_mode
 mic_count_and_oe_y load_a_alu_sum_actived pc_oe isr_block
 mic_count bypass alu_out_abl isr_bock
-mic_reset_and_we_x bypass pc_count read_mode
-
+mic_count_and_we_x bypass bypass read_mode
+mic_reset bypass pc_count isr_block
