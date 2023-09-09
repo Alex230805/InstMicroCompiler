@@ -7,4 +7,3 @@ mic_count bypass pc_count read_mode_and_pcl_load
 mic_count bypass pc_oe read_mode_and_pch_load
 mic_count bypass pc_load_reg isr_block
 mic_reset bypass pc_oe bypass
-

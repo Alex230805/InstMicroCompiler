@@ -1,4 +1,4 @@
-LDY_ZPG A4 4
+LDY_ZPG A4 5
 mic_count bypass pc_count bypass
 mic_count bypass pc_oe read_mode_and_dlatch_active
 mic_count bypass pc_oe latch_out_abl

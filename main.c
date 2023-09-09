@@ -292,9 +292,6 @@ int main(){
                 printf("Info extracted in micro-step %d for flag return control signal %s: %s\n",i+1,InstructionList.pointer->name,buffer_out_5[z]);
                 strcpy(InstructionList.pointer->microcode_rom5[z], buffer_out_5[z]);
             }else{
-                if((strcmp(InstructionList.pointer->name, "BEQ")) == 0){
-                    printf("Address BEQ: %s, step: %d\n", InstructionList.pointer->ADDRESS, InstructionList.pointer->step);
-                }
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom1[z],buffer_out_1[z], rom1);
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom2[z],buffer_out_2[z], rom2);
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom3[z],buffer_out_3[z], rom3);
@@ -407,7 +404,7 @@ uint16_t hexDigitConverter(char s){
 }
 
 uint16_t hexStringConverter(char string[]){
-    uint16_t HexString = 0;
+    uint16_t HexString = 0x0000;
     int len = strlen(string);
     for(int i=0;i<len;i++){
         if(!isxdigit(string[i]))
@@ -430,8 +427,7 @@ int write(uint8_t buffer[], uint16_t opcode, int step, FILE *pointer){
         if(address > 0xFF){
             address &= 0xFF;
         }
-        address = (address << 8) & 0xFF00;
-        address = (opcode & 0xFFFF) | address;
+        address = (address << 8) |(opcode & 0xFF);
     }
     statusOp = 1;
     return statusOp;
