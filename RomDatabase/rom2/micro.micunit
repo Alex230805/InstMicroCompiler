@@ -33,4 +33,7 @@ sp_oe_pcl_load
 sp_oe_pch_load
 pc_oe_alu_in
 sp_to_bus
+pc_count_alu_load
+pch_bus_load_b
+pc_load_from_adr
 END

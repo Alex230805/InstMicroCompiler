@@ -2,6 +2,6 @@ DEC_ZPG C6 5
 mic_count bypass pc_count bypass
 mic_count bypass pc_oe read_mode_and_dlatch_active
 mic_count bypass pc_oe latch_out_abl
-mic_count load_a_dec_actived bypass read_mode
-mic_reset_and_we_a alu_out pc_count isr_block
+mic_count load_a_dec_actived latch_out_abl read_mode
+mic_reset alu_out bypass write_mode
 
