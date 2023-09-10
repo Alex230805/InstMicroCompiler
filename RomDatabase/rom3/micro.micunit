@@ -28,4 +28,6 @@ load_a_alu_inc_actived
 load_a_alu_dec_actived
 alu_2_inc_actived
 load_c_alu_16b_adr
+load_a_alu_cmp_actived
+alu_cmp_actived
 END
