@@ -1,8 +1,7 @@
-BPL 10 7
+BPL 10 6
 mic_count bypass pc_count bypass
 mic_count bypass alu_in_pch_bus isr_block
 mic_count load_a pcl_bus isr_block
 mic_count load_c_alu_16b_adr pc_oe read_mode
-mic_count bypass inc_reg isr_block
 mic_count bypass alu_all_adr_out_pc_load isr_block
 mic_reset bypass pc_count isr_block
