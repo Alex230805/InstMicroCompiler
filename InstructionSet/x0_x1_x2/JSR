@@ -1,6 +1,5 @@
-JSR 20 8
+JSR 20 7
 mic_count bypass pc_count bypass
-mic_count bypass inc_reg isr_block
 mic_count bypass sp_dec_pcl_bus write_mode
 mic_count bypass sp_dec_pch_bus write_mode
 mic_count bypass pc_count read_mode_and_pcl_load
