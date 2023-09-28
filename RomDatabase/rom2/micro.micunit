@@ -36,4 +36,6 @@ sp_to_bus
 pc_count_alu_load
 pch_bus_load_b
 pc_load_from_adr
+pc_save_adr
+pc_load_saved
 END
