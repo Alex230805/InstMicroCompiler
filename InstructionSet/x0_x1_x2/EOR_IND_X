@@ -1,3 +1,9 @@
-EOR_IND_X 41 12
-
-
+EOR_IND_X 41 8
+mic_count bypass pc_count bypass
+mic_count load_a bypass read_mode
+mic_count_and_oe_x alu_sum_actived alu_in isr_block
+mic_count bypass alu_out_abl isr_block
+mic_count bypass bypass read_mode_and_dlatch_active
+mic_count_and_oe_a load_a bypass latch_out_abl
+mic_count alu_eor_actived alu_in read_mode
+mic_reset_and_we_a alu_out pc_count isr_block

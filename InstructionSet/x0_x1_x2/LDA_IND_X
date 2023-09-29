@@ -1,1 +1,8 @@
-LDA_IND_X A1 12
+LDA_IND_X A1 7
+mic_count bypass pc_count bypass
+mic_count load_a bypass read_mode
+mic_count_and_oe_x alu_sum_actived alu_in isr_block
+mic_count bypass alu_out_abl isr_block
+mic_count bypass bypass read_mode_and_dlatch_active
+mic_count bypass bypass latch_out_abl
+mic_reset_and_we_a bypass pc_count read_mode

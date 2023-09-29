@@ -1,1 +1,8 @@
-ORA_Y_IND 11 14
+ORA_Y_IND 11 7
+mic_count bypass pc_count bypass
+mic_count bypass bypass read_mode_and_dlatch_active
+mic_count_and_oe_y load_a bypass latch_out_abl
+mic_count alu_sum_actived alu_in read_mode
+mic_count_and_oe_a load_a alu_all_adr_out isr_block
+mic_count alu_or_actived alu_in read_mode
+mic_reset_and_we_a alu_out pc_count isr_block
