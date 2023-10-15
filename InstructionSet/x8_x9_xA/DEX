@@ -1,4 +1,4 @@
 DEX CA 3
-mic_count bypass pc_oe bypass
-mic_count_and_oe_x load_a_alu_dec_active pc_oe isr_block
-mic_reset_and_we_x alu_out pc_count isr_block
+mic_count bypass pc_count bypass
+mic_count_and_oe_x load_a_alu_dec_actived pc_oe isr_block
+mic_reset_and_we_x alu_out pc_oe isr_block
