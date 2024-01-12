@@ -3,6 +3,13 @@
 #include "lib/list.h"
 #include <ctype.h>
 
+/**
+    Activate debug info:
+
+    #define COMPILER_DEBUG_INFO
+
+**/
+
 void showData(listHeader * InstructionList);
 
 uint16_t hexStringConverter(char string[]);
@@ -223,18 +230,22 @@ int main(){
     //define main struct 
     listHeader InstructionList = initializeHeader();
     romContainer RomData = initializeRomContainer();
+
     //load database
     loadDatabase(path_hex_1, path_microcode_1,&RomData, rom1);
-    printf("1st rom -> database loaded\n");
     loadDatabase(path_hex_2, path_microcode_2,&RomData, rom2);
-    printf("2nd rom -> database loaded\n");
     loadDatabase(path_hex_3, path_microcode_3,&RomData, rom3);
-    printf("3rd rom -> database loaded\n");
     loadDatabase(path_hex_4, path_microcode_4,&RomData, rom4);
-    printf("4th rom -> database loaded\n");
     loadDatabase(path_hex_5, path_microcode_5, &RomData, rom5);
-    printf("5ft rom -> database loaded\n");
-    printf("Start loading instruction set .. ");
+
+    #if defined (COMPILER_DEBUG_INFO)
+        printf("1st rom -> database loaded\n");
+        printf("2nd rom -> database loaded\n");
+        printf("3rd rom -> database loaded\n");
+        printf("4th rom -> database loaded\n");
+        printf("5ft rom -> database loaded\n");
+    #endif
+    
     for(int i=0;i<INST_LIMIT+8;i++){
         char buffer_in_1[64][64];
         char buffer_in_2[64][64];
@@ -262,7 +273,9 @@ int main(){
                 for(int z=0;z<n->step;z++){
                     strcpy(n->microcode_rom5[z], buffer_in_5[z]);
                 }
-                printf("Flag/status requeset Instructions parsed: %d\n", i+1);
+                #if defined (COMPILER_DEBUG_INFO)
+                    printf("Flag/status requeset Instructions parsed: %d\n", i+1);
+                #endif
             }else{
                 for(int z=0;z<n->step;z++){
                     strcpy(n->microcode_rom1[z], buffer_in_1[z]);
@@ -270,16 +283,16 @@ int main(){
                     strcpy(n->microcode_rom3[z], buffer_in_3[z]);
                     strcpy(n->microcode_rom4[z], buffer_in_4[z]);
                 }
-                printf("Instructions parsed: %d\n", i+1);
+                #if defined (COMPILER_DEBUG_INFO)
+                    printf("Instructions parsed: %d\n", i+1);
+                #endif
             }
             listAddInstNode(&InstructionList,n);
         }
         fclose(inst);
     }
-    printf("Done!\n");
 
-
-    printf("Start traslating .. ");
+    printf("Compiling");
     for(int i=0;i<INST_LIMIT+8;i++){
         char buffer_out_1[64][64];
         char buffer_out_2[64][64];
@@ -289,14 +302,18 @@ int main(){
         for(int z=0;z<InstructionList.pointer->step;z++){
             if(i >= INST_LIMIT){
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom5[z], buffer_out_5[z], rom5);
-                printf("Info extracted in micro-step %d for flag return control signal %s: %s\n",i+1,InstructionList.pointer->name,buffer_out_5[z]);
+                #if defined (COMPILER_DEBUG_INFO)
+                    printf("Info extracted in micro-step %d for flag return control signal %s: %s\n",i+1,InstructionList.pointer->name,buffer_out_5[z]);
+                #endif
                 strcpy(InstructionList.pointer->microcode_rom5[z], buffer_out_5[z]);
             }else{
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom1[z],buffer_out_1[z], rom1);
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom2[z],buffer_out_2[z], rom2);
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom3[z],buffer_out_3[z], rom3);
                 extractFromDatabase(&RomData, InstructionList.pointer->microcode_rom4[z],buffer_out_4[z], rom4);
-                printf("Info extracted in micro-step %d for instruction %s : %s %s %s %s\n",i+1,InstructionList.pointer->name,buffer_out_4[z],buffer_out_3[z],buffer_out_2[z],buffer_out_1[z]);
+                #if defined (COMPILER_DEBUG_INFO)
+                    printf("Info extracted in micro-step %d for instruction %s : %s %s %s %s\n",i+1,InstructionList.pointer->name,buffer_out_4[z],buffer_out_3[z],buffer_out_2[z],buffer_out_1[z]);
+                #endif
                 strcpy(InstructionList.pointer->microcode_rom1[z],buffer_out_1[z]);
                 strcpy(InstructionList.pointer->microcode_rom2[z],buffer_out_2[z]);
                 strcpy(InstructionList.pointer->microcode_rom3[z],buffer_out_3[z]);
@@ -308,18 +325,19 @@ int main(){
         }
 
     }
-    printf("Done!\n");
     InstructionList.pointer = InstructionList.first;
     
     
-    printf("Start dumping .. ");
+    printf("Saving compiled instruction set");
     bin1 = fopen(path_bin_1, "w+b");
     bin2 = fopen(path_bin_2, "w+b");
     bin3 = fopen(path_bin_3, "w+b");
     bin4 = fopen(path_bin_4, "w+b");
     bin5 = fopen(path_bin_5, "w+b");
     if(bin1 == NULL || bin2 == NULL || bin3 == NULL || bin4 == NULL || bin5 == NULL){
-        printf("\nFailed while opening output binary file, aborting ..\n");
+        #if defined (COMPILER_DEBUG_INFO)
+            printf("\nFailed while opening output binary file, aborting ..\n");
+        #endif
         exit(0);
     }else{
         uint8_t buffer_out_1[64];
@@ -360,7 +378,6 @@ int main(){
     fclose(bin3);
     fclose(bin4);
     fclose(bin5);
-    printf("Done!\n");
     InstructionList.pointer = InstructionList.first;
     printf("Show written data? (Y/N): ");
     scanf("%c", &sel);
@@ -369,9 +386,7 @@ int main(){
     }
     InstructionList.pointer = InstructionList.first;
     freeISET(&InstructionList);
-    printf("Memory clear: instruction set\n");
     freeRomDatabase(&RomData);
-    printf("Memory clear: Rom Container ( aka: RomDatabase )\n");
     return 0;
 }
 

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/am/Documents/InstructionMicroCompiler",
-      "program": "/home/am/Documents/InstructionMicroCompiler/build/Debug/outDebug",
+      "cwd": "/Users/alessandro/Documents/Project/Corsair64_asm_6502/ISCompiler",
+      "program": "/Users/alessandro/Documents/Project/Corsair64_asm_6502/ISCompiler/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
